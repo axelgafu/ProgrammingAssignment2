@@ -79,7 +79,7 @@ makeCacheMatrix <- function(x = matrix())
 #' >
 #' 
 #' @export
-cacheSolve <- function(x, ...) 
+cacheSolve <- function( x ) 
 {
     if( is.null( x$getInverse() ) )
     {
