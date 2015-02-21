@@ -45,6 +45,15 @@ makeCacheMatrix <- function(x = matrix())
 #' function, the inverse can be retrieved by the $getInverse() function in the
 #' matrix.
 #' 
+#' If a message like the following is shown when executing cacheSolve, that
+#' means the matrix was not invertible:
+#' > cmi <- cacheSolve( cm )
+#' Show Traceback
+#' 
+#' Rerun with Debug
+#' Error en solve.default(x$getMatrix()) : 
+#'     Lapack routine dgesv: system is exactly singular: U[2,2] = 0 >
+#'     
 #' @param x is a CacheMatrix data type.
 #' 
 #' @return A matrix that is the inverse of 'x'
@@ -58,7 +67,16 @@ makeCacheMatrix <- function(x = matrix())
 #' [1,] -0.19444444  0.05555556  0.36111111
 #' [2,]  0.27777778 -0.22222222  0.05555556
 #' [3,]  0.02777778  0.27777778 -0.19444444
-#' > 
+#' 
+#' ## Second time cacheSolve is called it will return the cahced inverse:
+#' > cmi <- cacheSolve( cm )
+#' Getting cached inverse...
+#' > cmi
+#' [,1]        [,2]        [,3]
+#' [1,] -0.19444444  0.05555556  0.36111111
+#' [2,]  0.27777778 -0.22222222  0.05555556
+#' [3,]  0.02777778  0.27777778 -0.19444444
+#' >
 #' 
 #' @export
 cacheSolve <- function(x, ...) 
