@@ -1,18 +1,17 @@
 #' The current .R file contains a set of functions that provide a mechanism to
 #' make more efficient the work with matrices. The way in which that is
 #' achieved is by caching the result of the marix operations. The result is
-#' calculated only the first time and it remains in memory until the matriz is
+#' calculated only the first time and it remains in memory until the matrix is
 #' replaced. Whenever the client code uses the CacheMatrix API.
 #' 
 #' @author Axel Garcia.
 
 #' @name makeCacheMatrix
 #' 
-#' Write a short comment describing this function
-#' This function creates an CacheMatrix object with the following available
-#' Methods.
+#' This function creates a CacheMatrix variable which is required by the
+#' cacheSolve function.
 #' 
-#' @param x is an invertible square matrix.
+#' @param x should be an invertible square matrix.
 #' 
 #' @return A CacheMatrix object with the matrix specified by \code{x}.
 #' 
@@ -41,22 +40,24 @@ makeCacheMatrix <- function(x = matrix())
 #' @name cacheSolve
 #' 
 #' This function computes the inverse of the matrix passed as paremeter. The
-#' result is returned by this function and set to the matrix. After calling this
-#' function, the inverse can be retrieved by the $getInverse() function in the
-#' matrix.
+#' result is returned to the caller and set to the cacheMatrix variable passed
+#' as parameter. 
+#' 
+#' After calling this function, the inverse matrix can be retrieved from the
+#' cacheMatrix variable by calling its cacheMatrix$getInverse() function.
 #' 
 #' If a message like the following is shown when executing cacheSolve, that
 #' means the matrix was not invertible:
-#' > cmi <- cacheSolve( cm )
-#' Show Traceback
+#'     > cmi <- cacheSolve( cm )
+#'     Show Traceback
 #' 
-#' Rerun with Debug
-#' Error en solve.default(x$getMatrix()) : 
-#'     Lapack routine dgesv: system is exactly singular: U[2,2] = 0 >
+#'     Rerun with Debug
+#'     Error en solve.default(x$getMatrix()) : 
+#'         Lapack routine dgesv: system is exactly singular: U[2,2] = 0 >
 #'     
 #' @param x is a CacheMatrix data type.
 #' 
-#' @return A matrix that is the inverse of 'x'
+#' @return The inverse matrix of cacheMatrix \code(x)
 #' 
 #' @examples
 #' > mat <- matrix( data=rep( c(1, 2, 3, 4), times=9), 3, 3)
